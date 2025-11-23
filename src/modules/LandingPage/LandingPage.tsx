@@ -4,10 +4,14 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
+import { ComingSoon } from '@/components/ComingSoon'
 import useLandingPage from './LandingPage.hook'
+import useComingSoon from '@/components/ComingSoon/ComingSoon.hook'
 
 const LandingPage = () => {
   const { countdown } = useLandingPage()
+  const loginComingSoon = useComingSoon()
+  const kandidatComingSoon = useComingSoon()
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -69,6 +73,7 @@ const LandingPage = () => {
             <Button 
               size="lg" 
               className="px-8 py-6 text-base md:text-lg font-semibold"
+              onClick={loginComingSoon.openDialog}
             >
               Mulai / Login
             </Button>
@@ -76,6 +81,7 @@ const LandingPage = () => {
               size="lg" 
               variant="outline"
               className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 py-6 text-base md:text-lg font-semibold"
+              onClick={kandidatComingSoon.openDialog}
             >
               Kenali Kandidat
             </Button>
@@ -85,6 +91,20 @@ const LandingPage = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Coming Soon Dialogs */}
+      <ComingSoon 
+        open={loginComingSoon.isOpen}
+        onOpenChange={loginComingSoon.setIsOpen}
+        title="Fitur Login Sedang Dalam Pengembangan"
+        description="Fitur login sedang dalam tahap pengembangan. Kami akan segera meluncurkannya dalam waktu dekat. Terima kasih atas kesabaran Anda!"
+      />
+      <ComingSoon 
+        open={kandidatComingSoon.isOpen}
+        onOpenChange={kandidatComingSoon.setIsOpen}
+        title="Fitur Kenali Kandidat Sedang Dalam Pengembangan"
+        description="Fitur untuk melihat profil kandidat sedang dalam tahap pengembangan. Kami akan segera meluncurkannya dalam waktu dekat. Terima kasih atas kesabaran Anda!"
+      />
     </div>
   )
 }

@@ -1,0 +1,18 @@
+import { useState } from 'react'
+
+const useComingSoon = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const openDialog = () => setIsOpen(true)
+  const closeDialog = () => setIsOpen(false)
+
+  return {
+    isOpen,
+    openDialog,
+    closeDialog,
+    setIsOpen,
+  }
+}
+
+export default useComingSoon
+
