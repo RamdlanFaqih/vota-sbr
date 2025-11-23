@@ -1,0 +1,1 @@
+export { default as VotePramuka } from './VotePramuka'
