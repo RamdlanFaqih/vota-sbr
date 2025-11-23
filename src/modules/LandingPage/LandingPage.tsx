@@ -16,8 +16,7 @@ import {
 } from 'lucide-react'
 
 const LandingPage = () => {
-  const { countdown } = useLandingPage()
-  const loginComingSoon = useComingSoon()
+  const { countdown, handleLogin } = useLandingPage()
   const kandidatComingSoon = useComingSoon()
 
   return (
@@ -83,7 +82,7 @@ const LandingPage = () => {
             <Button 
               size="lg" 
               className="px-8 py-6 text-base font-semibold min-w-[200px] group"
-              onClick={loginComingSoon.openDialog}
+              onClick={handleLogin}
             >
               <Vote className="w-4 h-4 mr-2" />
               Mulai / Login
@@ -121,15 +120,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <Footer />
-
-      {/* Coming Soon Dialogs */}
-      <ComingSoon 
-        open={loginComingSoon.isOpen}
-        onOpenChange={loginComingSoon.setIsOpen}
-        title="Fitur Login Sedang Dalam Pengembangan"
-        description="Fitur login sedang dalam tahap pengembangan. Kami akan segera meluncurkannya dalam waktu dekat. Terima kasih atas kesabaran Anda!"
-      />
-      <ComingSoon 
+      <ComingSoon   
         open={kandidatComingSoon.isOpen}
         onOpenChange={kandidatComingSoon.setIsOpen}
         title="Fitur Kenali Kandidat Sedang Dalam Pengembangan"

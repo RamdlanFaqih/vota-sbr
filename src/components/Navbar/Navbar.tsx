@@ -6,13 +6,14 @@ import { ComingSoon } from '@/components/ComingSoon'
 import useComingSoon from '@/components/ComingSoon/ComingSoon.hook'
 import Link from 'next/link'
 import { Vote } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface NavbarProps {
     className?: string
 }
 
 const Navbar = ({ className }: NavbarProps) => {
-    const loginComingSoon = useComingSoon()
+    const router = useRouter()
     const kandidatComingSoon = useComingSoon()
     const tentangComingSoon = useComingSoon()
 
@@ -54,7 +55,7 @@ const Navbar = ({ className }: NavbarProps) => {
                             <Button
                                 size="sm"
                                 className="ml-4"
-                                onClick={loginComingSoon.openDialog}
+                                onClick={() => router.push('/login')}
                             >
                                 Login
                             </Button>
@@ -66,7 +67,7 @@ const Navbar = ({ className }: NavbarProps) => {
                                 size="sm"
                                 variant="ghost"
                                 className="text-gray-700"
-                                onClick={loginComingSoon.openDialog}
+                                onClick={() => router.push('/login')}
                             >
                                 Login
                             </Button>
@@ -76,12 +77,6 @@ const Navbar = ({ className }: NavbarProps) => {
             </nav>
 
             {/* Coming Soon Dialogs */}
-            <ComingSoon
-                open={loginComingSoon.isOpen}
-                onOpenChange={loginComingSoon.setIsOpen}
-                title="Fitur Login Sedang Dalam Pengembangan"
-                description="Fitur login sedang dalam tahap pengembangan. Kami akan segera meluncurkannya dalam waktu dekat. Terima kasih atas kesabaran Anda!"
-            />
             <ComingSoon
                 open={kandidatComingSoon.isOpen}
                 onOpenChange={kandidatComingSoon.setIsOpen}
