@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useElectionStore } from '@/store/electionStore'
 
-const VoteSuccessPage = () => {
+const VoteSuccessContent = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const type = searchParams.get('type') || 'osis'
@@ -101,6 +101,20 @@ const VoteSuccessPage = () => {
         </Button>
       </div>
     </div>
+  )
+}
+
+const VoteSuccessPage = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center px-4">
+        <div className="max-w-md w-full text-center">
+          <p className="text-muted-foreground">Memuat...</p>
+        </div>
+      </div>
+    }>
+      <VoteSuccessContent />
+    </Suspense>
   )
 }
 
