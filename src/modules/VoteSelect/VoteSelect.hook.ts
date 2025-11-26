@@ -1,26 +1,30 @@
 import { useRouter } from 'next/navigation'
 import { useElectionStore } from '@/store/electionStore'
+import { useEffect } from 'react'
 
 const useVoteSelect = () => {
   const router = useRouter()
   const { 
     status, 
-    voteOsis, 
-    votePramuka, 
     hasVotedOsis, 
     hasVotedPramuka 
   } = useElectionStore()
 
+  // Redirect to complete page if all votes are done
+  useEffect(() => {
+    if (status === 'VOTED_ALL') {
+      router.push('/vote/complete')
+    }
+  }, [status, router])
+
   const handleVoteOsis = () => {
     if (!hasVotedOsis() && status !== 'VOTED_ALL') {
-      voteOsis()
       router.push('/vote/osis')
     }
   }
 
   const handleVotePramuka = () => {
     if (!hasVotedPramuka() && status !== 'VOTED_ALL') {
-      votePramuka()
       router.push('/vote/pramuka')
     }
   }
